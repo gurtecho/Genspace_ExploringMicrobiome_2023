@@ -1,0 +1,9 @@
+sample-id	absolute-filepath
+20210908-JE-amylopectin-2_S143_L001_R1_001	$PWD/data/20210908-JE-amylopectin-2_S143_L001_R1_001.fastq.gz
+20210908-JE-amylopectin-2_S143_L001_R2_001	$PWD/data/20210908-JE-amylopectin-2_S143_L001_R2_001.fastq.gz
+ERR1883247	$PWD/data/ERR1883247.fastq.gz
+ERR1883248	$PWD/data/ERR1883248.fastq.gz
+ERR1883260	$PWD/data/ERR1883260.fastq.gz
+ERR1883294	$PWD/data/ERR1883294.fastq.gz
+ERR1883315	$PWD/data/ERR1883315.fastq.gz
+ERR1883210	$PWD/data/ERR1883210.fastq.gz
