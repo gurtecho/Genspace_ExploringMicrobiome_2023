@@ -27,11 +27,11 @@ QIIME_YAML_TEMPLATE = (
 )
 
 if len(sys.argv) == 2:
-    version = sys.argv
+    version = sys.argv[1]
 else:
-    version = "2021.8"
+    version = "2023.2"
 
-if float(version) < 2021.4:
+if tuple(float(v) for v in version.split(".")) < (2021, 4):
     pyver = "36"
 else:
     pyver = "38"
@@ -64,18 +64,6 @@ def run_and_check(args, check, message, failure, success, console=con):
         console.log("[red]%s[/red]" % failure, out)
         cleanup()
         sys.exit(1)
-
-
-def _hack_in_the_plugins():
-    """Add the plugins to QIIME."""
-    import qiime2.sdk as sdk
-    from importlib.metadata import entry_points
-
-    pm = sdk.PluginManager(add_plugins=False)
-    for entry in entry_points()["qiime2.plugins"]:
-        plugin = entry.load()
-        package = entry.value.split(':')[0].split('.')[0]
-        pm.add_plugin(plugin, package, entry.name)
 
 
 if __name__ == "__main__":
@@ -144,15 +132,6 @@ if __name__ == "__main__":
             con.log("[red]Qiime 2 can not be imported :sob:[/red]")
             sys.exit(1)
         con.log("[blue]:bar_chart: Qiime 2 can be imported :tada:[/blue]")
-
-        con.log(":bar_chart: Setting up QIIME 2 plugins...")
-        try:
-            _hack_in_the_plugins()
-            from qiime2.plugins import feature_table # noqa
-        except Exception:
-            con.log("[red]Could not add the plugins :sob:[/red]")
-            sys.exit(1)
-        con.log("[blue]:bar_chart: Plugins are working :tada:[/blue]")
 
     cleanup()
 
